@@ -1,0 +1,132 @@
+.calculator-box {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  padding: 10px;
+
+  .header-container {
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    width: 100%;
+  }
+
+  .mortgageform {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+width: 100%;
+
+ label{
+  margin-bottom: 6px;
+ }
+
+    
+    div {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      width: 100%;
+      .mortgageAmountInput {
+        grid-column: 1 / 3;
+        display: flex;
+        margin-bottom: 10px;
+        span {
+          display: flex;
+          border: 1px solid black;
+          width: 100%;
+          align-items: center;
+          padding: 6px;
+          
+          input {
+            width: 100%;
+            border: none;
+            height: 20px;
+          }
+        }
+      }
+
+      .mortgageTerm {
+        display: flex;
+        flex-direction: column;
+       
+         label{
+          margin-bottom: 6px;
+         }
+        span {
+          display: flex;
+          margin-right: 20px;
+          border: 1px solid black;
+          align-items: center;
+          padding: 6px;
+          input {
+            width: 100%;
+            border: none;
+            height: 20px;
+          }
+        }
+      }
+      .interestRate {
+        display: flex;
+        flex-direction: column;
+        label{
+          margin-bottom: 6px;
+         }
+        span {
+          display: flex;
+          border: 1px solid black;
+          align-items: center;
+          padding: 6px;
+          input {
+            width: 100%;
+            border: none;
+            height: 20px;
+          }
+        }
+      }
+    }
+  }
+
+  .mortgageType {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    width: 100%;
+
+    label {
+      margin-bottom: 6px;
+    }
+
+    .mortgage_repayment,
+    .mortgage_interest {
+      display: flex;
+      align-items: center;
+      margin-bottom: 6px;
+      border: 1px solid black;
+      padding: 8px;
+      height: 20px;
+      
+      label{
+        margin: 0;
+      }
+    }
+  }
+
+  .btn-container {
+    display: flex;
+    margin-bottom: 20px;
+    button{
+      background-color: $lime;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px;
+      width: 72%;
+      img{
+        width: 20px;
+        margin-right: 4px;
+      }
+    }
+  }
+}

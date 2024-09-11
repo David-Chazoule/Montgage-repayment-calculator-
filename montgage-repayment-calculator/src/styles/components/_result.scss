@@ -1,0 +1,39 @@
+.result_container{
+  background-color: $Slate700;
+  color: $white;
+  padding: 10px;
+
+.result_header{
+display: flex;
+flex-direction: column;
+color: $Slate500;
+
+h1{
+  color: $white;
+}
+}
+
+.result-box{
+  display: flex;
+  flex-direction: column;
+  border-top: 4px  solid $lime;
+  background-color: $Slate900;
+  border-radius: 10px;
+ .title-repayments{
+  color: $Slate300;
+ 
+ }
+ h2{
+  color: $lime;
+}
+
+hr{
+  width: 90%;
+}
+
+}
+
+border-radius: 0 0 0 50px;
+
+
+}
