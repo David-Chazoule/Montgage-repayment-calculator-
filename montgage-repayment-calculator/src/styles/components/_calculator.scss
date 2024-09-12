@@ -1,28 +1,39 @@
 .calculator-box {
   display: flex;
   flex-direction: column;
-  width: 80%;
-  padding: 10px;
+  width: 88%;
+  margin: 0px 0px 0px 26px;
+  font-family: $font1;
+  color: $Slate700;
 
   .header-container {
-    display:flex;
+    display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
     width: 100%;
+
+    h3 {
+      margin: 4px 0 4px 0;
+    }
+
+    p {
+      font-size: 14px;
+      text-decoration: underline dotted;
+    }
   }
 
   .mortgageform {
+    margin-top: 10px;
     margin-bottom: 20px;
     display: flex;
     flex-direction: column;
-width: 100%;
+    width: 100%;
 
- label{
-  margin-bottom: 6px;
- }
+    label {
+      margin-bottom: 8px;
+    }
 
-    
     div {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -33,15 +44,21 @@ width: 100%;
         margin-bottom: 10px;
         span {
           display: flex;
-          border: 1px solid black;
+          border: 1px solid $Slate500;
           width: 100%;
           align-items: center;
-          padding: 6px;
-          
+          border-radius: 5px;
+          margin-bottom: 12px;
+
+          i {
+            background-color: $Slate100;
+            padding: 12px;
+            font-weight: 500;
+            border-radius: 5px 0 0 5px;
+          }
+
           input {
-            width: 100%;
-            border: none;
-            height: 20px;
+            @include input;
           }
         }
       }
@@ -49,38 +66,50 @@ width: 100%;
       .mortgageTerm {
         display: flex;
         flex-direction: column;
-       
-         label{
-          margin-bottom: 6px;
-         }
+
+        label {
+          margin-bottom: 8px;
+        }
         span {
           display: flex;
           margin-right: 20px;
-          border: 1px solid black;
+          border: 1px solid $Slate500;
           align-items: center;
-          padding: 6px;
+          border-radius: 5px;
+          margin-bottom: 12px;
+
           input {
-            width: 100%;
-            border: none;
-            height: 20px;
+            @include input;
+          }
+          i {
+            background-color: $Slate100;
+            padding: 12px;
+            font-weight: 500;
+            border-radius: 0 5px 5px 0;
           }
         }
       }
       .interestRate {
         display: flex;
         flex-direction: column;
-        label{
-          margin-bottom: 6px;
-         }
+        label {
+          margin-bottom: 8px;
+        }
         span {
           display: flex;
-          border: 1px solid black;
+          border: 1px solid $Slate500;
+          margin-bottom: 12px;
           align-items: center;
-          padding: 6px;
+          border-radius: 5px;
+
+          i {
+            background-color: $Slate100;
+            padding: 12px;
+            font-weight: 500;
+            border-radius: 0 5px 5px 0;
+          }
           input {
-            width: 100%;
-            border: none;
-            height: 20px;
+            @include input;
           }
         }
       }
@@ -90,23 +119,28 @@ width: 100%;
   .mortgageType {
     display: flex;
     flex-direction: column;
-    margin-bottom: 20px;
+    margin-bottom: 12px;
     width: 100%;
 
     label {
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
 
     .mortgage_repayment,
     .mortgage_interest {
       display: flex;
       align-items: center;
-      margin-bottom: 6px;
-      border: 1px solid black;
-      padding: 8px;
+      margin-bottom: 15px;
+      border: 1px solid $Slate500;
+      padding: 12px;
       height: 20px;
-      
-      label{
+      border-radius: 5px;
+
+      input {
+        margin-right: 6px;
+      }
+
+      label {
         margin: 0;
       }
     }
@@ -115,15 +149,18 @@ width: 100%;
   .btn-container {
     display: flex;
     margin-bottom: 20px;
-    button{
+    button {
       background-color: $lime;
+      border: none;
       border-radius: 20px;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 8px;
-      width: 72%;
-      img{
+      padding: 16px;
+      width: 64%;
+      font-size: 14px;
+      font-weight: 600;
+      img {
         width: 20px;
         margin-right: 4px;
       }

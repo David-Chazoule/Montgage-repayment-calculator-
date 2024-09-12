@@ -1,24 +1,20 @@
-.main_container{
+.main_container {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  border: 2px solid #000000;
-  
-  width: 60%;
+  min-height: 60vh;
+
+  width: 48%;
   background-color: $white;
-border-radius: 12px;
-overflow: hidden;
-  .calculator-container{
+  border-radius: 16px;
+  overflow: hidden;
+  .calculator-container {
     display: flex;
     align-items: center;
-    
+
     width: 100%;
-    
   }
 
-  .result-container{
+  .result-container {
     display: flex;
-    
-    
-
   }
 }

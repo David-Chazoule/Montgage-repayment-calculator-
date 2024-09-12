@@ -1,16 +1,14 @@
-
-
 @font-face {
-  font-family:'Jakarta';
-  src:url(../assets/fonts/static/PlusJakartaSans-Medium.ttf);
+  font-family: "Jakarta";
+  src: url(../assets/fonts/static/PlusJakartaSans-Medium.ttf);
 }
 
-$font1: 'Jakarta';
+$font1: "Jakarta";
 
 //primary color
 
-$lime : hsl(61, 70%, 52%);
-$red :  hsl(4, 69%, 50%);
+$lime: hsl(61, 70%, 52%);
+$red: hsl(4, 69%, 50%);
 
 //neutral
 
@@ -21,4 +19,13 @@ $Slate500: hsl(200, 26%, 54%);
 $Slate700: hsl(200, 24%, 40%);
 $Slate900: hsl(202, 55%, 16%);
 
-
+@mixin input {
+  width: 100%;
+  border: none;
+  height: 20px;
+  padding: 12px;
+  border-radius: 5px;
+  font-weight: 600;
+  font-size: 18px;
+  color: $Slate700;
+}

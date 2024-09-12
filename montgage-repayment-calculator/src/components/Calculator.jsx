@@ -5,24 +5,24 @@ function Calculator() {
   return (
     <div className="calculator-box">
       <div className="header-container">
-        <h1>Mortgage Calculator</h1>
+        <h3>Mortgage Calculator</h3>
         <p>Clear All</p>
       </div>
       <div className="mortgageform">
         <label>MortgageAmount</label>
         <div>
-        <div className="mortgageAmountInput">
-          <span>
-          <i>£</i>
-          <input />
-          </span>
-        </div>
-        {/* <div className="term-rate-box"> */}
+          <div className="mortgageAmountInput">
+            <span>
+              <i>£</i>
+              <input />
+            </span>
+          </div>
+          {/* <div className="term-rate-box"> */}
           <div className="mortgageTerm">
             <label>Mortgage Term</label>
             <span>
               <input />
-              <i>year</i>
+              <i>years</i>
             </span>
           </div>
           <div className="interestRate">
@@ -32,7 +32,7 @@ function Calculator() {
               <i>%</i>
             </span>
           </div>
-          </div>
+        </div>
         {/* </div> */}
       </div>
 
