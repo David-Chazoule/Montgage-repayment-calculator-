@@ -1,60 +1,131 @@
-import React from "react";
+import React, { useState } from "react";
 import calculatorIcon from "../assets/images/icon-calculator.svg";
+import {
+  validMortgageAmount,
+  validMortgageTerm,
+  validInterestRate,
+  InterestOnly,
+  Repayment
+} from "../outils/outils";
 
-function Calculator() {
+function Calculator({ setResultPage, setMonthyRepayments, setRepayOver }) {
+  const [mortgageAmount, setMortgageAmount] = useState("");
+  const [mortgageTerm, setMortgageTerm] = useState("");
+  const [interestRate, setInterestRate] = useState("");
+  const [method, setMethod] = useState("");
+  const [tests, setTest] = useState("");
+
+  const Method = () => {
+    if (method === "interest") {
+      InterestOnly(mortgageAmount, mortgageTerm,setMonthyRepayments, setRepayOver);
+    }
+
+    if (method === "repayment") {
+      Repayment(mortgageAmount, mortgageTerm,interestRate,setMonthyRepayments,setRepayOver);
+    }
+  };
+
+  const handlePost = (e) => {
+    e.preventDefault();
+    setResultPage(true);
+    Method();
+  };
+
   return (
     <div className="calculator-box">
       <div className="header-container">
         <h3>Mortgage Calculator</h3>
         <p>Clear All</p>
       </div>
-      <div className="mortgageform">
-        <label>MortgageAmount</label>
-        <div>
-          <div className="mortgageAmountInput">
-            <span>
-              <i>£</i>
-              <input />
-            </span>
-          </div>
-          {/* <div className="term-rate-box"> */}
-          <div className="mortgageTerm">
-            <label>Mortgage Term</label>
-            <span>
-              <input />
-              <i>years</i>
-            </span>
-          </div>
-          <div className="interestRate">
-            <label>Interest Rate</label>
-            <span>
-              <input />
-              <i>%</i>
-            </span>
+      <form onSubmit={handlePost}>
+        <div className="mortgageform">
+          <label>MortgageAmount</label>
+          <div>
+            <div className="mortgageAmountInput">
+              <span>
+                <i>£</i>
+                <input
+                  type="text"
+                  id="mortageAmount"
+                  onChange={(e) =>
+                    validMortgageAmount(
+                      setMortgageAmount,
+                      e.target.value,
+                      setTest
+                    )
+                  }
+                />
+              </span>
+              {tests}
+            </div>
+
+            <div className="mortgageTerm">
+              <label>Mortgage Term</label>
+              <span>
+                <input
+                  type="text"
+                  id="mortageTerm"
+                  onChange={(e) =>
+                    validMortgageTerm(setMortgageTerm, e.target.value, setTest)
+                  }
+                />
+                <i>years</i>
+              </span>
+            </div>
+            <div className="interestRate">
+              <label>Interest Rate</label>
+              <span>
+                <input
+                  type="text"
+                  id="interestRate"
+                  onChange={(e) =>
+                    validInterestRate(setInterestRate, e.target.value, setTest)
+                  }
+                />
+                <i>%</i>
+              </span>
+            </div>
           </div>
         </div>
-        {/* </div> */}
-      </div>
 
-      <div className="mortgageType">
-        <label>MortgageType</label>
-        <div className="mortgage_repayment">
-          <input type="radio" />
-          <label>Repayment</label>
+        <div className="mortgageType">
+          <label>MortgageType</label>
+          <div
+            className="mortgage_repayment"
+            onClick={() => setMethod("repayment")}
+          >
+            <input
+              type="radio"
+              value="repayment"
+              id="repayment"
+              checked={method === "repayment"}
+              onChange={() => setMethod("repayment")}
+            />
+            <label htmlFor="repayment">Repayment</label>
+          </div>
+
+          <div
+            className="mortgage_interest"
+            onClick={() => setMethod("interest")}
+          >
+            <input
+              type="radio"
+              value="interest"
+              id="interest"
+              checked={method === "interest"}
+              onChange={() => setMethod("interest")}
+            />
+            <label htmlFor="interest">Interest Only</label>
+          </div>
         </div>
 
-        <div className="mortgage_interest">
-          <input type="radio" />
-          <label>Interest Only</label>
+        <div className="btn-container">
+          <button>
+            <img src={calculatorIcon} alt="calculator-img" />
+            Calculate Repayments
+          </button>
         </div>
-      </div>
-
-      <div className="btn-container">
-        <button>
-          <img src={calculatorIcon} alt="" />
-          Calculate Repayments
-        </button>
-      </div>
+      </form>
     </div>
   );
 }

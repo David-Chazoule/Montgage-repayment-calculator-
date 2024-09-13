@@ -1,12 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import illustrationResult from "../assets/images/illustration-empty.svg";
 
-function Result() {
-  const [resultScreen, setResultScreen] = useState(false);
+function Result({ resultPage, monthlyRepayments, repayOver }) {
   return (
     <div className="result_container">
-      <div className={resultScreen ? "container" : "container center"}>
-        {resultScreen ? (
+      <div className={resultPage ? "container" : "container center"}>
+        {resultPage ? (
           <>
             <div className="result_header">
               <h3>Your result</h3>
@@ -19,12 +18,12 @@ function Result() {
             </div>
             <div className="result-box">
               <p className="title-repayments">Your monthly repayments</p>
-              <h1>£00000</h1>
+              <h1> £{monthlyRepayments.toFixed(2)}</h1>
               <hr />
               <p className="title-repayments">
                 Total you'll repay over the term
               </p>
-              <h3>£000</h3>
+              <h3>£ {repayOver.toFixed(2)}</h3>
             </div>
           </>
         ) : (
