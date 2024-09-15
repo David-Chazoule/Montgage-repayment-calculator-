@@ -28,4 +28,19 @@ $Slate900: hsl(202, 55%, 16%);
   font-weight: 600;
   font-size: 18px;
   color: $Slate700;
+  &:focus{
+    outline: none;
+  }
+  
+}
+
+@mixin focused {
+  &.focused {
+    border-color: $lime; // Change la couleur de la bordure lors de la sélection
+    background-color: hsla(61, 70%, 52%, 0.579); // Change le fond de la div
+
+    i {
+      background-color: $lime; // Change le fond de l'icône aussi
+    }
+  }
 }

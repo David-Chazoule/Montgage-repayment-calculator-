@@ -1,14 +1,15 @@
 import { ValidNumber } from "../regex/Regex";
 
 export const validMortgageAmount = (state, value, error) => {
-  state(value);
-  if (!ValidNumber.test(value)) {
-    error("wrong!!");
+  const numberValue = Number(value);
+
+  if (!ValidNumber.test(value) || numberValue <= 0) {
+    error("This field is required");
   } else {
     error("");
   }
+  state(numberValue);
 };
-
 export const validMortgageTerm = (state, value, error) => {
   state(value);
   if (!ValidNumber.test(value)) {

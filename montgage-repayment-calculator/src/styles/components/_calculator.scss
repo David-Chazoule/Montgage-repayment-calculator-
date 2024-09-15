@@ -51,6 +51,8 @@
           border-radius: 5px;
           margin-bottom: 12px;
 
+          @include focused;
+
           i {
             background-color: $Slate100;
             padding: 12px;
@@ -78,6 +80,7 @@
           align-items: center;
           border-radius: 5px;
           margin-bottom: 12px;
+          @include focused;
 
           input {
             @include input;
@@ -102,6 +105,7 @@
           margin-bottom: 12px;
           align-items: center;
           border-radius: 5px;
+          @include focused;
 
           i {
             background-color: $Slate100;
@@ -138,9 +142,41 @@
       height: 20px;
       border-radius: 5px;
       cursor: pointer;
+      z-index: 1;
 
-      input {
+      &.checked {
+        background-color: hsla(61, 70%, 52%, 0.103);
+        border-color: $lime;
+      }
+
+      input[type="radio"] {
         margin-right: 6px;
+        cursor: pointer;
+        appearance: none;
+        width: 16px;
+        height: 16px;
+        border: 1px solid $Slate500;
+        border-radius: 50%;
+        margin-right: 6px;
+        position: relative;
+        cursor: pointer;
+        transition: background-color 0.3s, border-color 0.3s;
+
+        &:checked {
+          background-color: white; 
+          border-color: $lime;
+        }
+
+        &:checked::before {
+          content: "";
+          position: absolute;
+          top: 2px;
+          left: 2px;
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          background-color: $lime; 
+        }
       }
 
       label {

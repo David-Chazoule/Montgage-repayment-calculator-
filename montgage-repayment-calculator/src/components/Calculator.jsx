@@ -5,7 +5,7 @@ import {
   validMortgageTerm,
   validInterestRate,
   InterestOnly,
-  Repayment
+  Repayment,
 } from "../outils/outils";
 
 function Calculator({ setResultPage, setMonthyRepayments, setRepayOver }) {
@@ -13,40 +13,72 @@ function Calculator({ setResultPage, setMonthyRepayments, setRepayOver }) {
   const [mortgageTerm, setMortgageTerm] = useState("");
   const [interestRate, setInterestRate] = useState("");
   const [method, setMethod] = useState("");
+  const [selected, setSelected] = useState(null);
   const [tests, setTest] = useState("");
 
   const Method = () => {
     if (method === "interest") {
-      InterestOnly(mortgageAmount, mortgageTerm,setMonthyRepayments, setRepayOver);
+      InterestOnly(
+        mortgageAmount,
+        mortgageTerm,
+        setMonthyRepayments,
+        setRepayOver
+      );
     }
 
     if (method === "repayment") {
-      Repayment(mortgageAmount, mortgageTerm,interestRate,setMonthyRepayments,setRepayOver);
+      Repayment(
+        mortgageAmount,
+        mortgageTerm,
+        interestRate,
+        setMonthyRepayments,
+        setRepayOver
+      );
     }
   };
 
   const handlePost = (e) => {
     e.preventDefault();
     setResultPage(true);
+
     Method();
   };
+
+  const Clear = () => {
+    console.log("Clearing fields");
+    setMortgageAmount("");
+    setMortgageTerm("");
+    setInterestRate("");
+    setMethod("");
+    setTest(""); // Clear the error messages
+    setSelected(null);
+    setResultPage(false);
+  };
+
+  console.log(mortgageAmount, "A", mortgageTerm, "b", interestRate, "c");
 
   return (
     <div className="calculator-box">
       <div className="header-container">
         <h3>Mortgage Calculator</h3>
-        <p>Clear All</p>
+        <p onClick={Clear}>Clear All</p>
       </div>
       <form onSubmit={handlePost}>
         <div className="mortgageform">
           <label>MortgageAmount</label>
           <div>
             <div className="mortgageAmountInput">
-              <span>
+              <span
+                className={selected === "mortgageAmount" ? "focused" : ""}
+                onClick={() => setSelected("mortgageAmount")}
+              >
                 <i>£</i>
                 <input
                   type="text"
                   id="mortageAmount"
+                  value={mortgageAmount}
+                  onFocus={() => setSelected("mortgageAmount")}
+                  onBlur={() => setSelected(null)}
                   onChange={(e) =>
                     validMortgageAmount(
                       setMortgageAmount,
@@ -61,10 +93,16 @@ function Calculator({ setResultPage, setMonthyRepayments, setRepayOver }) {
 
             <div className="mortgageTerm">
               <label>Mortgage Term</label>
-              <span>
+              <span
+                className={selected === "mortageTerm" ? "focused" : ""}
+                onClick={() => setSelected("mortageTerm")}
+              >
                 <input
                   type="text"
                   id="mortageTerm"
+                  value={mortgageTerm}
+                  onFocus={() => setSelected("mortgageTerm")}
+                  onBlur={() => setSelected(null)}
                   onChange={(e) =>
                     validMortgageTerm(setMortgageTerm, e.target.value, setTest)
                   }
@@ -74,10 +112,16 @@ function Calculator({ setResultPage, setMonthyRepayments, setRepayOver }) {
             </div>
             <div className="interestRate">
               <label>Interest Rate</label>
-              <span>
+              <span
+                className={selected === "interestRate" ? "focused" : ""}
+                onClick={() => setSelected("interestRate")}
+              >
                 <input
                   type="text"
                   id="interestRate"
+                  value={interestRate}
+                  onFocus={() => setSelected("interestRate")}
+                  onBlur={() => setSelected(null)}
                   onChange={(e) =>
                     validInterestRate(setInterestRate, e.target.value, setTest)
                   }
@@ -91,7 +135,9 @@ function Calculator({ setResultPage, setMonthyRepayments, setRepayOver }) {
         <div className="mortgageType">
           <label>MortgageType</label>
           <div
-            className="mortgage_repayment"
+            className={`mortgage_repayment ${
+              method === "repayment" ? "checked" : ""
+            }`}
             onClick={() => setMethod("repayment")}
           >
             <input
@@ -105,7 +151,9 @@ function Calculator({ setResultPage, setMonthyRepayments, setRepayOver }) {
           </div>
 
           <div
-            className="mortgage_interest"
+            className={`mortgage_interest ${
+              method === "interest" ? "checked" : ""
+            }`}
             onClick={() => setMethod("interest")}
           >
             <input
