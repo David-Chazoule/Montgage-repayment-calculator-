@@ -8,7 +8,7 @@ function Calculator({ setResultPage, setMonthyRepayments, setRepayOver }) {
   const [interestRate, setInterestRate] = useState("");
   const [method, setMethod] = useState("");
   const [selected, setSelected] = useState(null);
-  const [tests, setTest] = useState("");
+  const [errors, setErrors] = useState({});
 
   const Method = () => {
     if (method === "interest") {
@@ -33,19 +33,48 @@ function Calculator({ setResultPage, setMonthyRepayments, setRepayOver }) {
 
   const handlePost = (e) => {
     e.preventDefault();
-    setResultPage(true);
-
-    Method();
+    if (validateForm()) {
+      setResultPage(true);
+      Method();
+    }
   };
 
-  const handleNumberChange = (setter) => (e) => {
+  const handleNumberChange = (setter, field) => (e) => {
     const value = e.target.value;
-
     if (/^\d*\.?\d*$/.test(value)) {
       setter(value);
-    }
 
-   
+      if (value === "0" && value.trim() !== "") {
+        setErrors((prevErrors) => ({ ...prevErrors, [field]: "error" }));
+      } else {
+        setErrors((prevErrors) => ({ ...prevErrors, [field]: "" }));
+      }
+    }
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+    if (mortgageAmount === "0" || !mortgageAmount) newErrors.mortgageAmount = "error";
+    if (mortgageTerm === "0" || !mortgageAmount) newErrors.mortgageTerm = "error";
+    if (interestRate === "0" || !mortgageAmount) newErrors.interestRate = "error";
+    if (!method) newErrors.method = "error";
+    setErrors(newErrors);
+    console.log(newErrors,"newErrors")
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const getClassNames = (field) => {
+    if (errors[field]) {
+      return "error focused";
+    }
+    return selected === field ? "focused" : "";
+  };
+
+  const getErrorMessage = (field) => {
+    if (errors[field]) {
+      return <p className="error-message">This field is required</p>;
+    }
+    return null;
   };
 
   const Clear = () => {
@@ -53,14 +82,12 @@ function Calculator({ setResultPage, setMonthyRepayments, setRepayOver }) {
     setMortgageTerm("");
     setInterestRate("");
     setMethod("");
-    setTest("");
+    setErrors({});
     setSelected(null);
     setResultPage(false);
   };
 
-  
-
-  console.log(mortgageAmount, "A", mortgageTerm, "b", interestRate, "c");
+  console.log(errors, "errors");
 
   return (
     <div className="calculator-box">
@@ -74,7 +101,7 @@ function Calculator({ setResultPage, setMonthyRepayments, setRepayOver }) {
           <div>
             <div className="mortgageAmountInput">
               <span
-                className={selected === `mortgageAmount ` ? "focused" : ""}
+                className={getClassNames("mortgageAmount")}
                 onClick={() => setSelected("mortgageAmount")}
               >
                 <i>£</i>
@@ -84,16 +111,19 @@ function Calculator({ setResultPage, setMonthyRepayments, setRepayOver }) {
                   value={mortgageAmount}
                   onFocus={() => setSelected("mortgageAmount")}
                   onBlur={() => setSelected(null)}
-                  onChange={handleNumberChange(setMortgageAmount)}
+                  onChange={handleNumberChange(
+                    setMortgageAmount,
+                    "mortgageAmount"
+                  )}
                 />
               </span>
-              {tests}
+              {getErrorMessage("mortgageAmount")}
             </div>
 
             <div className="mortgageTerm">
               <label>Mortgage Term</label>
               <span
-                className={selected === "mortgageTerm" ? "focused" : ""}
+                className={getClassNames("mortgageTerm")}
                 onClick={() => setSelected("mortgageTerm")}
               >
                 <input
@@ -102,15 +132,16 @@ function Calculator({ setResultPage, setMonthyRepayments, setRepayOver }) {
                   value={mortgageTerm}
                   onFocus={() => setSelected("mortgageTerm")}
                   onBlur={() => setSelected(null)}
-                  onChange={handleNumberChange(setMortgageTerm)}
+                  onChange={handleNumberChange(setMortgageTerm, "mortgageTerm")}
                 />
                 <i>years</i>
               </span>
+              {getErrorMessage("mortgageTerm")}
             </div>
             <div className="interestRate">
               <label>Interest Rate</label>
               <span
-                className={selected === "interestRate" ? "focused" : ""}
+                className={getClassNames("interestRate")}
                 onClick={() => setSelected("interestRate")}
               >
                 <input
@@ -119,10 +150,11 @@ function Calculator({ setResultPage, setMonthyRepayments, setRepayOver }) {
                   value={interestRate}
                   onFocus={() => setSelected("interestRate")}
                   onBlur={() => setSelected(null)}
-                  onChange={handleNumberChange(setInterestRate)}
+                  onChange={handleNumberChange(setInterestRate, "interestRate")}
                 />
                 <i>%</i>
               </span>
+              {getErrorMessage("interestRate")}
             </div>
           </div>
         </div>
@@ -160,6 +192,9 @@ function Calculator({ setResultPage, setMonthyRepayments, setRepayOver }) {
             />
             <label htmlFor="interest">Interest Only</label>
           </div>
+          {errors.method && (
+            <p className="error-message">This field is required</p>
+          )}
         </div>
 
         <div className="btn-container">
