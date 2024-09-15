@@ -1,12 +1,6 @@
 import React, { useState } from "react";
 import calculatorIcon from "../assets/images/icon-calculator.svg";
-import {
-  validMortgageAmount,
-  validMortgageTerm,
-  validInterestRate,
-  InterestOnly,
-  Repayment,
-} from "../outils/outils";
+import { InterestOnly, Repayment } from "../outils/outils";
 
 function Calculator({ setResultPage, setMonthyRepayments, setRepayOver }) {
   const [mortgageAmount, setMortgageAmount] = useState("");
@@ -44,16 +38,27 @@ function Calculator({ setResultPage, setMonthyRepayments, setRepayOver }) {
     Method();
   };
 
+  const handleNumberChange = (setter) => (e) => {
+    const value = e.target.value;
+
+    if (/^\d*\.?\d*$/.test(value)) {
+      setter(value);
+    }
+
+   
+  };
+
   const Clear = () => {
-    console.log("Clearing fields");
     setMortgageAmount("");
     setMortgageTerm("");
     setInterestRate("");
     setMethod("");
-    setTest(""); // Clear the error messages
+    setTest("");
     setSelected(null);
     setResultPage(false);
   };
+
+  
 
   console.log(mortgageAmount, "A", mortgageTerm, "b", interestRate, "c");
 
@@ -69,7 +74,7 @@ function Calculator({ setResultPage, setMonthyRepayments, setRepayOver }) {
           <div>
             <div className="mortgageAmountInput">
               <span
-                className={selected === "mortgageAmount" ? "focused" : ""}
+                className={selected === `mortgageAmount ` ? "focused" : ""}
                 onClick={() => setSelected("mortgageAmount")}
               >
                 <i>£</i>
@@ -79,13 +84,7 @@ function Calculator({ setResultPage, setMonthyRepayments, setRepayOver }) {
                   value={mortgageAmount}
                   onFocus={() => setSelected("mortgageAmount")}
                   onBlur={() => setSelected(null)}
-                  onChange={(e) =>
-                    validMortgageAmount(
-                      setMortgageAmount,
-                      e.target.value,
-                      setTest
-                    )
-                  }
+                  onChange={handleNumberChange(setMortgageAmount)}
                 />
               </span>
               {tests}
@@ -94,18 +93,16 @@ function Calculator({ setResultPage, setMonthyRepayments, setRepayOver }) {
             <div className="mortgageTerm">
               <label>Mortgage Term</label>
               <span
-                className={selected === "mortageTerm" ? "focused" : ""}
-                onClick={() => setSelected("mortageTerm")}
+                className={selected === "mortgageTerm" ? "focused" : ""}
+                onClick={() => setSelected("mortgageTerm")}
               >
                 <input
                   type="text"
-                  id="mortageTerm"
+                  id="mortgageTerm"
                   value={mortgageTerm}
                   onFocus={() => setSelected("mortgageTerm")}
                   onBlur={() => setSelected(null)}
-                  onChange={(e) =>
-                    validMortgageTerm(setMortgageTerm, e.target.value, setTest)
-                  }
+                  onChange={handleNumberChange(setMortgageTerm)}
                 />
                 <i>years</i>
               </span>
@@ -122,9 +119,7 @@ function Calculator({ setResultPage, setMonthyRepayments, setRepayOver }) {
                   value={interestRate}
                   onFocus={() => setSelected("interestRate")}
                   onBlur={() => setSelected(null)}
-                  onChange={(e) =>
-                    validInterestRate(setInterestRate, e.target.value, setTest)
-                  }
+                  onChange={handleNumberChange(setInterestRate)}
                 />
                 <i>%</i>
               </span>
