@@ -1,7 +1,7 @@
 # Montgage-repayment-calculator
 
 
-This is my solution to the Mortgage repayment calculator challenge on Frontend Mentor.
+This is my solution to the [Mortgage Repayment Calculator Challenge](https://www.frontendmentor.io/challenges/mortgage-repayment-calculator-Galx1LXK73) on Frontend Mentor.
 
 Thanks for checking out this front-end coding challenge.
 
