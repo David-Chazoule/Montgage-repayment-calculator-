@@ -10,6 +10,8 @@ function Calculator({ setResultPage, setMonthyRepayments, setRepayOver }) {
   const [selected, setSelected] = useState(null);
   const [errors, setErrors] = useState({});
 
+  // Method to calculate repayments based on selected mortgage type
+
   const Method = () => {
     if (method === "interest") {
       InterestOnly(
@@ -31,6 +33,7 @@ function Calculator({ setResultPage, setMonthyRepayments, setRepayOver }) {
     }
   };
 
+  // Form submission handler
   const handlePost = (e) => {
     e.preventDefault();
     if (validateForm()) {
@@ -39,6 +42,7 @@ function Calculator({ setResultPage, setMonthyRepayments, setRepayOver }) {
     }
   };
 
+  // Handle input change for numeric fields (mortgage amount, term, and interest rate)
   const handleNumberChange = (setter, field) => (e) => {
     const value = e.target.value;
     if (/^\d*\.?\d*$/.test(value)) {
@@ -52,17 +56,21 @@ function Calculator({ setResultPage, setMonthyRepayments, setRepayOver }) {
     }
   };
 
+  // Validate the form before submission
   const validateForm = () => {
     const newErrors = {};
-    if (mortgageAmount === "0" || !mortgageAmount) newErrors.mortgageAmount = "error";
-    if (mortgageTerm === "0" || !mortgageAmount) newErrors.mortgageTerm = "error";
-    if (interestRate === "0" || !mortgageAmount) newErrors.interestRate = "error";
+    if (mortgageAmount === "0" || !mortgageAmount)
+      newErrors.mortgageAmount = "error";
+    if (mortgageTerm === "0" || !mortgageAmount)
+      newErrors.mortgageTerm = "error";
+    if (interestRate === "0" || !mortgageAmount)
+      newErrors.interestRate = "error";
     if (!method) newErrors.method = "error";
     setErrors(newErrors);
-    console.log(newErrors,"newErrors")
     return Object.keys(newErrors).length === 0;
   };
 
+  // Dynamically apply class names for input fields based on error and focus status
   const getClassNames = (field) => {
     if (errors[field]) {
       return "error focused";
@@ -70,6 +78,7 @@ function Calculator({ setResultPage, setMonthyRepayments, setRepayOver }) {
     return selected === field ? "focused" : "";
   };
 
+  // Get error message for a specific field, display if there's an error
   const getErrorMessage = (field) => {
     if (errors[field]) {
       return <p className="error-message">This field is required</p>;
@@ -77,6 +86,7 @@ function Calculator({ setResultPage, setMonthyRepayments, setRepayOver }) {
     return null;
   };
 
+  // Clear all fields and reset the form
   const Clear = () => {
     setMortgageAmount("");
     setMortgageTerm("");
@@ -86,8 +96,6 @@ function Calculator({ setResultPage, setMonthyRepayments, setRepayOver }) {
     setSelected(null);
     setResultPage(false);
   };
-
-  console.log(errors, "errors");
 
   return (
     <div className="calculator-box">
@@ -117,7 +125,9 @@ function Calculator({ setResultPage, setMonthyRepayments, setRepayOver }) {
                   )}
                 />
               </span>
-              {getErrorMessage("mortgageAmount")}
+              <span className="error-box">
+                {getErrorMessage("mortgageAmount")}
+              </span>
             </div>
 
             <div className="mortgageTerm">
@@ -136,7 +146,9 @@ function Calculator({ setResultPage, setMonthyRepayments, setRepayOver }) {
                 />
                 <i>years</i>
               </span>
-              {getErrorMessage("mortgageTerm")}
+              <span className="error-box">
+                {getErrorMessage("mortgageTerm")}
+              </span>
             </div>
             <div className="interestRate">
               <label>Interest Rate</label>
@@ -154,7 +166,9 @@ function Calculator({ setResultPage, setMonthyRepayments, setRepayOver }) {
                 />
                 <i>%</i>
               </span>
-              {getErrorMessage("interestRate")}
+              <span className="error-box">
+                {getErrorMessage("interestRate")}
+              </span>
             </div>
           </div>
         </div>
@@ -193,7 +207,9 @@ function Calculator({ setResultPage, setMonthyRepayments, setRepayOver }) {
             <label htmlFor="interest">Interest Only</label>
           </div>
           {errors.method && (
-            <p className="error-message">This field is required</p>
+            <span className="error-box">
+              <p className="error-message">This field is required</p>
+            </span>
           )}
         </div>
 

@@ -1,3 +1,5 @@
+
+// Function to calculate interest-only mortgage repayments
 export const InterestOnly = (
   mortgageAmount,
   mortgageTerm,
@@ -12,6 +14,7 @@ export const InterestOnly = (
   setRepayOver(mortgageA);
 };
 
+// Function to calculate repayment mortgage repayments (principal + interest)
 export const Repayment = (
   mortgageAmount,
   mortgageTerm,
@@ -23,17 +26,15 @@ export const Repayment = (
   let term = Number(mortgageTerm);
   let interest = Number(interestRate);
 
-  let monthlyPayment = term * 12; // Nombre total de paiements mensuels
-  let monthlyinterest = interest / 100 / 12; // Taux d'intérêt mensuel
+  let monthlyPayment = term * 12;
+  let monthlyinterest = interest / 100 / 12;
 
-  // Calcul du paiement mensuel
   let monthlyRepay =
     (mortgageA *
       (monthlyinterest * Math.pow(1 + monthlyinterest, monthlyPayment))) /
     (Math.pow(1 + monthlyinterest, monthlyPayment) - 1);
   setMonthyRepayments(monthlyRepay);
 
-  // Calcul du total à rembourser sur la durée du prêt
   let result = monthlyRepay * monthlyPayment;
   setRepayOver(result);
 };

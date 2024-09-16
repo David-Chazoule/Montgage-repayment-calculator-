@@ -5,6 +5,12 @@
   font-family: $font1;
   border-radius: 0 0 0 6ch;
 
+  @media screen and (max-width: 930px) {
+    width: 100%;
+    display: flex;
+    border-radius: 0;
+  }
+
   .center {
     align-items: center;
     justify-content: center;
@@ -15,15 +21,33 @@
     margin: 16px;
     flex-direction: column;
 
+    @media screen and (max-width: 930px) {
+      align-items: center;
+      justify-content: center;
+    }
+
     .result_header {
       display: flex;
       flex-direction: column;
       color: $Slate500;
       margin-bottom: 40px;
 
+      @media screen and (max-width: 930px) {
+        width: 80%;
+      }
+
+      @media screen and (max-width: 600px) {
+        width: 100%;
+        margin-bottom: 20px;
+      }
+
       h3 {
         color: $white;
-        margin: 4px 0 4px 0;
+        margin: 10px 0 4px 0;
+
+        @media screen and (max-width: 930px) {
+          font-size: 22px;
+        }
       }
 
       p {
@@ -37,6 +61,14 @@
       border-top: 4px solid $lime;
       background-color: #0e2534;
       border-radius: 10px;
+
+      @media screen and (max-width: 930px) {
+        width: 80%;
+      }
+
+      @media screen and (max-width: 600px) {
+        width: 90%;
+      }
 
       .title-repayments {
         color: $Slate300;
@@ -65,8 +97,17 @@
       justify-content: center;
       margin: 100px 40px 40px 40px;
       width: 100%;
+
+      @media screen and (max-width: 930px) {
+        width: 100%;
+        margin: 20px;
+      }
       img {
         width: 160px;
+
+        @media screen and (max-width: 930px) {
+          width: 40%;
+        }
       }
 
       h2 {
@@ -78,6 +119,10 @@
         margin-top: 6px;
         width: 100%;
         color: $Slate700;
+
+        @media screen and (max-width: 930px) {
+          width: 66%;
+        }
       }
     }
   }

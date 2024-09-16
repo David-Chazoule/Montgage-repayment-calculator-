@@ -1,6 +1,7 @@
 import React from "react";
 import illustrationResult from "../assets/images/illustration-empty.svg";
 
+// Function to format numbers with commas (for readability in large numbers)
 function Result({ resultPage, monthlyRepayments, repayOver }) {
   const formatNumberWithCommas = (number) => {
     let str = number.toString();
@@ -17,7 +18,7 @@ function Result({ resultPage, monthlyRepayments, repayOver }) {
         {resultPage ? (
           <>
             <div className="result_header">
-              <h3>Your result</h3>
+              <h3>Your results</h3>
 
               <p>
                 Your results are shown below based on the information you
