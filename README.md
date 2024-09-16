@@ -10,7 +10,7 @@ Frontend Mentor challenges help you improve your coding skills by building reali
 To do this challenge, you need a basic understanding of HTML, CSS and JavaScript.
 
 
-##The challenge
+## The challenge
 Your challenge is to build out this mortgage repayment calculator and get it looking as close to the design as possible.
 
 You can use any tools you like to help you complete the challenge. So if you've got something you'd like to practice, feel free to give it a go.
